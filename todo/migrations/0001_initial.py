@@ -27,3 +27,4 @@ class Migration(migrations.Migration):
             ],
         ),
     ]
+# this is demo git
