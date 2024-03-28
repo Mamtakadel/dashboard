@@ -9,11 +9,13 @@ from drf_yasg import openapi
 
 from todo.models import Todo
 from todo.serializers import TodoSerializers
+from todo.pagination import PaginationDemo
 
 # #1. Get
 class TodoApiView(APIView):
     def get(self, request, *args, **kwargs):
         pk = kwargs.get("id")
+        paginator= PaginationDemo()
         # breakpoint()
         if pk:
             try:
@@ -27,8 +29,11 @@ class TodoApiView(APIView):
             List all the todo items for given requested user
             """
             todos = Todo.objects.all()
-            serializer = TodoSerializers(todos, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            result=paginator.paginate_queryset(todos, request)
+            serializer = TodoSerializers(result, many=True)
+            #return Response(serializer.data, status=status.HTTP_200_OK)
+            return paginator.get_paginated_response(serializer.data)
+
 
     # 2. Create
     @swagger_auto_schema(
