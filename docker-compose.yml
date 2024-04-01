@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   web:
-    build: ./code
+    build: ./
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./code/:/usr/src/code/
+      - ./:/usr/src/code/
     ports:
       - 8000:8000
     depends_on:
