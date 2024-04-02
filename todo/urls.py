@@ -22,7 +22,7 @@ from .views import (
 
 urlpatterns = [
     path('api/', TodoApiView.as_view()),
-    path('pagi/',TodoApiView.as_view(),name='pagi'),   
+    # path('pagi/',TodoApiView.as_view(),name='pagi'),   
     
 ]
 
