@@ -13,7 +13,7 @@ from todo.pagination import PaginationDemo
 
 # #1. Get
 class TodoApiView(APIView):
-    # @
+    
     def get(self, request, *args, **kwargs):
         pk = kwargs.get("id")
         paginator= PaginationDemo()
