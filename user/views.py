@@ -38,6 +38,7 @@ class RegisterUserAPIView(generics.CreateAPIView):
 
 #class based view to login
 class LoginUserAPIView(APIView):
+    
     # permission_classes = (AllowAny,)
 
     # permission_classes=[IsAuthenticate]
@@ -61,18 +62,21 @@ class LoginUserAPIView(APIView):
 
 
 # view authenticate 
-class AuthenticateAPIView (APIView):
+
+class AuthenticateAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self,request, *args,**kwargs):
-        content={
-            'user':str(request.user),
-            'auth':str(request.auth),
-        }
-        #print ("check")
-        if content:
-            return Response (content,status =200)
-        return Response ("Bad Request", Status=401)
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data, status=200)
+        # user= request.user.a
+        # return Response(
+        #     {"id":request.user.id,"firstname":request.user.username,"email":request.user.email}
+        #     , status=200
+        # )   
+        
+       
+        
 
        
 
