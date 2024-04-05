@@ -13,6 +13,7 @@ from todo.pagination import PaginationDemo
 
 # #1. Get
 class TodoApiView(APIView):
+    
     def get(self, request, *args, **kwargs):
         pk = kwargs.get("id")
         paginator= PaginationDemo()
@@ -99,6 +100,7 @@ class TodoApiView(APIView):
         serializer = TodoSerializers(todo_instance, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
+
             return Response({"res": "Object updated!"}, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -121,14 +123,14 @@ class TodoApiView(APIView):
     )
     def delete(self, request, *args, **kwargs):
         id = kwargs.get("id")
-        event = Todo.objects.get(id=id)
-        if not event:
+        todo_ins = Todo.objects.get(id=id)
+        if not todo_ins:
             return Response(
                 {"res": "Object with todo id does not exists"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        event.delete()
+        todo_ins.delete()
         return Response({"res": "Object deleted!"}, status=status.HTTP_200_OK)
 
 

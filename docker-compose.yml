@@ -1,23 +1,57 @@
-version: '3.8'
+# version: '3.8'
 
+# services:
+#   web:
+#     build: ./
+#     command: python3 manage.py runserver 0.0.0.0:8000
+#     volumes:
+#       - ./:/usr/src/code/
+#     ports:
+#       - 8000:8000
+#     depends_on:
+#       - db
+#   db:
+#     image: postgis/postgis:16-3.4-alpine
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data/
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=postgres
+#       - POSTGRES_DB=demodb
+#     ports:
+#       - 5434:5432
+
+# volumes:
+#   postgres_data:
+
+
+version: "3"
 services:
   web:
-    build: ./
-    command: python3 manage.py runserver 0.0.0.0:8000
+    env_file: .env
+    restart: always
+    build: .
     volumes:
-      - ./:/usr/src/code/
+      - .:/code
     ports:
-      - 8000:8000
+      - "8000:8000"
+    networks:
+      - task-network
     depends_on:
       - db
-  db:
-    image: postgres:15
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
+    entrypoint: ./entrypoint.sh
 
-volumes:
-  postgres_data:
+  db:
+    env_file: .env
+    image: postgis/postgis:16-3.4-alpine
+    restart: always
+    volumes:
+      - ./postgis_data:/var/lib/postgresql/data/
+    networks:
+      - task-network
+    ports:
+      - 5434:5432
+
+networks:
+  task-network:
+    driver: bridge

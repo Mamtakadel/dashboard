@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,8 +40,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "todo",
+    "user",
+    "palika",
     "rest_framework_swagger",
+    "rest_framework.authtoken",
     "drf_yasg",
+
 ]
 
 MIDDLEWARE = [
@@ -75,12 +80,25 @@ WSGI_APPLICATION = "dashboard.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE":os.environ.get("SQL_ENGINE","django.contrib.gis.db.backends.postgis") ,
+#         "NAME": os.environ.get("POSTGRES_DB","demodb"),
+#         "USER": os.environ.get("POSTGRES_USER", "postgres"),
+#         "PASSWORD": os.environ.get("POSTGRES_PASSWORD","postgres"),
+#         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+#         "PORT": os.environ.get("POSTGRES_PORT", "5434"),
+#     }
+# }
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "mydatabase",
+        "ENGINE":"django.contrib.gis.db.backends.postgis",
+        "NAME":"postgres",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "PORT": "5432",
+        "HOST": "db",
     }
 }
 
@@ -89,19 +107,28 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    # },
 ]
+#Authentication
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+# 'DEFAULT_PERMISSION_CLASSES': [
+#     'rest_framework.permissions.IsAuthenticated',
+# ]
+}
 
 
 # Internationalization
