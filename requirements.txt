@@ -83,3 +83,4 @@ wcwidth==0.2.5
 wrapt==1.14.1
 xmltodict==0.13.0
 django-rest-swagger==2.2.0
+# geopandas==22.0.2
