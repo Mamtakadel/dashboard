@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_yasg',
     'rest_framework_swagger',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -60,6 +62,7 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' 
 }
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -67,6 +70,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    
+    "http://127.0.0.1:5500",
 ]
 
 ROOT_URLCONF = 'dashboard.urls'
@@ -146,4 +154,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CELERY_BROKER_URL = 'redis://redis:6379/1'
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'todo_list.settings')
 CELERY_RESULT_BACKEND= "redis://redis:6379/1"
-CELERY_TIMEZONE='UTC'
+CELERY_TIMEZONE='Asia/Kathmandu'
