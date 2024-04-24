@@ -55,11 +55,7 @@ from dashboard.celery import app
 def upload_geojson(id):
     palika= PalikaUpload.objects.get(id=id)
     gdf = gpd.read_file(palika.file)
-    print("This is gdf",gdf)
-    print("==================")
-    print("==================")
-    print("========test==========")
-    print("==================")
+    
     for index, row in gdf.iterrows():
         geom = GEOSGeometry(str(row["geometry"]))
         print("This is geom",geom)
