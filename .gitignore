@@ -8,5 +8,5 @@ logfile
 **/**/__pycache__/**
 geospatialdata/
 .vscode
-logs
+logs/
 static/
