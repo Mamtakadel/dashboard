@@ -1,5 +1,4 @@
 .env
-<<<<<<< HEAD
 dashboard/__pycache__
 geospatial/__pycache__
 geospatialdata
@@ -12,7 +11,6 @@ todo/__pycache__
 palika/__pycache__
 .cache.sqlite
 celerybeat-schedule
-=======
 /postgis_data
 postgres_data
 /postgres_data
@@ -24,4 +22,3 @@ geospatialdata/
 .vscode
 logs
 static/
->>>>>>> 8981224 (Pycache/deleted)
