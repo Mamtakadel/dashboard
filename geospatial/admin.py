@@ -30,8 +30,9 @@ class PalikaGeometryAdmin(admin.ModelAdmin):
 
 
 class WeatherForecastAdmin(admin.ModelAdmin):
-    list_display=['precipitation', 'temperature_2m', 'rain', 'date','relative_humidity_2m']    
+    list_display=['precipitation', 'temperature_2m', 'rain', 'date', 'relative_humidity_2m']    
 
+# this is running--------------------------
            
     
 

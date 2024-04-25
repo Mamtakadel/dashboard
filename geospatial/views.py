@@ -139,7 +139,7 @@ def check_status(request):
 
 ############################################  Current Weather API #####################################################################
 class WeatherApi(APIView):
-    def post(self, request):
+   def post(self, request):
         retry_session = retry(retries = 5, backoff_factor = 0.2)
         openmeteo = openmeteo_requests.Client(session = retry_session)
 
@@ -191,4 +191,9 @@ class WeatherApi(APIView):
         print(f"Current apparent_temperature {current_apparent_temperature}")
         print(f"Current precipitation {current_precipitation}")
         print(f"Current rain {current_rain}")
-        return Response(WeatherForecast.objects.filter(id=obj.id).values())
+        return Response(WeatherForecast.objects.filter(id=obj.id).values()) 
+   
+   def get(self, request):
+        forecasts = WeatherForecast.objects.filter(temperature_2m__gte=30).values()
+        
+        return Response(forecasts)
