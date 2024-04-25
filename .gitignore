@@ -1,1 +1,12 @@
 .env
+/postgis_data
+postgres_data
+/postgres_data
+logfile
+/media
+**/__pycache__/
+**/**/__pycache__/**
+geospatialdata/
+.vscode
+logs
+static/
