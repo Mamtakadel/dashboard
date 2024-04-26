@@ -159,16 +159,11 @@ CELERY_RESULT_BACKEND= "redis://redis:6379/1"
 CELERY_TIMEZONE='Asia/Kathmandu'
 CELERY_TASK_SERIALIZER = 'json'
 
-# CELERY_BEAT_SCHEDULE = {
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
 
 
-#     'weather-task': {
-#         'task': 'geospatial.task.weatherpostapi',
-#         #'schedule': crontab(minute='*/10')
-#         #'schedule': crontab()
-#         'schedule': crontab(minute='*', second='0,10,20,30,40,50'),
-#     }
-#     }
 
 # CELERY_BEAT_SCHEDULE = {
 #     'weather-task': {

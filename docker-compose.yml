@@ -42,7 +42,7 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-    entrypoint: "celery -A dashboard worker -f /logs/worker.logs -l DEBUG"
+    entrypoint: "celery -A dashboard worker -l DEBUG"
     depends_on:
       - web
       - redis

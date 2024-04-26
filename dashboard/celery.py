@@ -28,7 +28,7 @@ app.conf.beat_schedule = {
 # create an object for your scheduling your task
     'fetch-and-store-temp-data-contrab': {
         'task': 'geospatial.task.weatherpostapi', #app_name.tasks.function_name
-        'schedule': crontab(minute='*/1'), #crontab() means run every minute
+        'schedule': crontab(), #execute daily at midnight
         # 'args' : (..., ...) In case function takes parameters, add them here
     }
 }    

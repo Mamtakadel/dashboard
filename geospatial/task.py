@@ -56,7 +56,7 @@ from geospatial.models import PalikaUpload, PalikaGeometry
 from dashboard.celery import app
 
 
-@shared_task
+@shared_task()
 def upload_geojson(id):
     palika= PalikaUpload.objects.get(id=id)
     gdf = gpd.read_file(palika.file)
@@ -84,7 +84,7 @@ def upload_geojson(id):
     #return palika
 ################################## Celery Beat #############################################
 
-@shared_task
+@shared_task(serializer='json')
 def weatherpostapi():
     retry_session = retry(retries = 5, backoff_factor = 0.2)
     openmeteo = openmeteo_requests.Client(session = retry_session)
