@@ -17,6 +17,7 @@ postgres_data
 logfile
 /media
 **/__pycache__/
+**/__pycache__
 **/**/__pycache__/**
 geospatialdata/
 .vscode
