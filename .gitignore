@@ -1,16 +1,4 @@
 .env
-dashboard/__pycache__
-geospatial/__pycache__
-geospatialdata
-media
-logs
-postgis_data
-redis
-static
-todo/__pycache__
-palika/__pycache__
-.cache.sqlite
-celerybeat-schedule
 /postgis_data
 postgres_data
 /postgres_data
@@ -20,5 +8,5 @@ logfile
 **/**/__pycache__/**
 geospatialdata/
 .vscode
-logs
+logs/
 static/

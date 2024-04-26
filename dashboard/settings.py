@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+from datetime import timedelta
+from celery.schedules import crontab
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -50,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_yasg',
     'rest_framework_swagger',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -60,6 +64,7 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' 
 }
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -67,6 +72,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    
+    "http://127.0.0.1:5500",
 ]
 
 ROOT_URLCONF = 'dashboard.urls'
@@ -146,4 +156,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CELERY_BROKER_URL = 'redis://redis:6379/1'
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'todo_list.settings')
 CELERY_RESULT_BACKEND= "redis://redis:6379/1"
-CELERY_TIMEZONE='UTC'
+CELERY_TIMEZONE='Asia/Kathmandu'
+CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+
+
+
+# CELERY_BEAT_SCHEDULE = {
+#     'weather-task': {
+#         'task': 'geospatial.task.weatherpostapi',
+#         'schedule': 60.0,  # Run every 5 seconds
+#         'args': (),  # Optional arguments for the task
+#     },
+# }

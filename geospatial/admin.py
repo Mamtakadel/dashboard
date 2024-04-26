@@ -9,7 +9,7 @@ from todo.models import Todo
 
 from django.contrib import admin
 
-from geospatial.models import  PalikaUpload, PalikaGeometry
+from geospatial.models import  PalikaUpload, PalikaGeometry, WeatherForecast
 
 # class TaskAdmin(admin.ModelAdmin):
 #     list_display = ['id','user', 'title','description', 'is_completed','is_created','category']
@@ -28,19 +28,18 @@ class PalikaUploadAdmin(admin.ModelAdmin):
 class PalikaGeometryAdmin(admin.ModelAdmin):
     list_display=['palika','attr_data','bbox','area','district','ward_number']
 
-# class GeoJsonDataAdmin(admin.ModelAdmin):
-#     list_display=['user', 'username','geom', 'palika_name', 'description', 'file_type', 'upload_date', 'data_file'] 
-    
-# class JsonUploadAdmin(admin.ModelAdmin):
-#     list_display=['palikaupload', 'palika_name', 'description', 'upload_date'] 
 
-# class JsonGeometryAdmin(admin.ModelAdmin):
-#     list_display=['palikaupload', 'palika_name', 'description', 'upload_date']            
+class WeatherForecastAdmin(admin.ModelAdmin):
+    list_display=['precipitation', 'temperature_2m', 'rain', 'date', 'relative_humidity_2m']    
+
+# this is running--------------------------
+           
     
 
 # admin.site.register(GeoSpatialData, GeoSpatialDataAdmin)
 admin.site.register(PalikaUpload, PalikaUploadAdmin)
 admin.site.register(PalikaGeometry, PalikaGeometryAdmin)
+admin.site.register(WeatherForecast, WeatherForecastAdmin)
 # admin.site.register(GeoJsonData, GeoJsonDataAdmin)
 # admin.site.register(JsonUpload, JsonUploadAdmin)
 # admin.site.register(JsonGeometry, JsonGeometryAdmin)

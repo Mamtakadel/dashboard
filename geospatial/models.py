@@ -38,4 +38,14 @@ class PalikaGeometry(models.Model):
     ward_number =models.CharField(max_length=100,blank=True,null=True)
 
 
+################################      Weather API ################################################    
+class WeatherForecast(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE, blank = True, null = True)
+    date=models.DateTimeField(blank=True, null=True)
+    temperature_2m=models.FloatField(blank=True, null=True)
+    relative_humidity_2m=models.FloatField(blank=True, null=True)
+    precipitation=models.FloatField(blank=True, null=True)
+    rain=models.FloatField(blank=True, null=True)
+
+
     
