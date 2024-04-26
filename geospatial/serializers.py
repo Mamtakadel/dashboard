@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from geospatial.models import  PalikaUpload, PalikaGeometry 
+from geospatial.models import  PalikaUpload, PalikaGeometry, WeatherForecast 
 
 
 
@@ -14,4 +14,11 @@ class  palikaGeometrySerializer(serializers.ModelSerializer):
     class Meta:
         model = PalikaGeometry
         fields = '__all__'
+
+
+############################################ Weather API ####################################
+class WeatherForecastSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= WeatherForecast
+        fields='__all__'
 

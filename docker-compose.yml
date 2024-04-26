@@ -1,7 +1,8 @@
 version: "3"
 services:
   web:
-    env_file: .env
+    env_file: 
+      - .env
     restart: always
     build: .
     volumes:
@@ -41,7 +42,7 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-    entrypoint: "celery -A dashboard worker -f /logs/worker.logs -l DEBUG"
+    entrypoint: "celery -A dashboard worker -l DEBUG"
     depends_on:
       - web
       - redis
@@ -52,8 +53,23 @@ services:
       - .env
 
     networks:
-    - task-network
+      - task-network
 
+  beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    entrypoint: "celery -A dashboard beat -f /logs/worker.logs -l DEBUG"
+    depends_on:
+      - web
+      - redis
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    networks:
+      - task-network
 
 networks:
   task-network:
